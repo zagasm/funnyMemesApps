@@ -10,6 +10,8 @@ import 'package:particles_flutter/particles_engine.dart' show Particles, Particl
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:zagasm/screen/auth/loginScreen.dart';
 
+import '../../generated/assets.dart';
+
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -84,7 +86,7 @@ class _SplashscreenState extends State<Splashscreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/logo/nameLogo.png',
+                    Assets.logoNameLogo,
                     width: screenWidth * 0.3,
                   )
                       .animate()

@@ -10,7 +10,7 @@ void showCustomSnackbar({
 }) {
   // 💜 Purple-themed colors
   const Color primaryPurple = Color(0xFF6C4DFF);     // Main purple
-  const Color backgroundDark = Color(0xFF1B1F2B);     // Dark background
+  const Color backgroundDark = Colors.white;     // Dark background
   const Color borderPurple = Color(0xFF6C4DFF);       // Border highlight
 
   // 🔔 Type-based styles
@@ -75,7 +75,7 @@ void showCustomSnackbar({
                     shape: BoxShape.circle,
                   ),
                   padding: const EdgeInsets.all(10),
-                  child: Icon(icon, color: Colors.white, size: 20),
+                  child: Icon(icon, color: Colors.black, size: 20),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -85,7 +85,7 @@ void showCustomSnackbar({
                       Text(
                         title,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -94,7 +94,7 @@ void showCustomSnackbar({
                       Text(
                         subtitle,
                         style: const TextStyle(
-                          color: Colors.white70,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),

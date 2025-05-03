@@ -1,10 +1,12 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 
 import '../../widgets/showSnackBar.dart';
-import '../home/homeScreen.dart'; // Make sure this exists
+import '../home/homeScreen.dart';
+import '../homeScreenTabs.dart'; // Make sure this exists
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -20,6 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
+  bool isPrivacyChecked = false;
 
   void _handleSignUp() {
     if (!_formKey.currentState!.validate()) {
@@ -59,13 +62,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // ✅ Soft gradient background
+          // Soft gradient background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(180, 103, 58, 183), // Soft DeepPurple
-                  Colors.white,
+                  //Color.fromARGB(180, 103, 58, 183), // Soft DeepPurple
+                  Colors.white, Colors.white,
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -190,7 +193,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                         TextButton(
                           onPressed: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context)=>AdvancedHomeScreen()));
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=>
+                                HomeScreenTab()));
                           },
                           child:  RichText(
                             text: TextSpan(
@@ -212,7 +216,89 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                         ).animate().fadeIn(),
-                      ],
+                        const SizedBox(height: 10),
+
+    Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+
+    const SizedBox(height: 10),
+
+    // Privacy Checkbox
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    Checkbox(
+    value: isPrivacyChecked,
+    activeColor: Colors.deepPurple,
+    shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(4),
+    ),
+    onChanged: (value) {
+    setState(() {
+      isPrivacyChecked = !isPrivacyChecked;
+    });
+    // If using setState:
+    // setState(() {});
+    },
+    ),
+    Expanded(
+    child: RichText(
+    text: TextSpan(
+    text: '      I agree to the ',
+    style: GoogleFonts.orbitron(
+    fontSize: 12,
+    color: Colors.black87,
+    ),
+    children: [
+    TextSpan(
+    text: 'Terms & Conditions',
+    style: GoogleFonts.orbitron(
+    color: Colors.deepPurple,
+    decoration: TextDecoration.underline,
+    ),
+    recognizer: TapGestureRecognizer()
+    ..onTap = () {
+    showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    title: Text(
+    "Terms & Conditions",
+    style: GoogleFonts.orbitron(
+    color: Colors.deepPurple,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    content: SingleChildScrollView(
+    child: Text(
+    "By signing up, you agree to our Terms & Conditions and Privacy Policy. Please review them before proceeding.",
+    style: GoogleFonts.roboto(fontSize: 14),
+    ),
+    ),
+    actions: [
+    TextButton(
+    child: const Text("Close"),
+    onPressed: () => Navigator.pop(context),
+    ),
+    ],
+    ),
+    );
+    },
+    ),
+    ],
+    ),
+    ),
+    ),
+    ],
+    ).animate().fadeIn().slideY(begin: 0.1),
+
+    const SizedBox(height: 10),
+    ],
+    ),
+
+
+    ],
                     ),
                   ),
                 ),
@@ -249,4 +335,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+
 }

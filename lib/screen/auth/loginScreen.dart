@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:zagasm/screen/auth/signUpScreen.dart';
+import '../../generated/assets.dart';
 import '../../widgets/showSnackBar.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -73,8 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color.fromARGB(180, 103, 58, 183),
-                      Colors.white,
+                      //Color.fromARGB(180, 103, 58, 183),
+                      Colors.white,Colors.white,
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -102,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           // Logo
                           Image.asset(
-                            'assets/logo/nameLogo.png',
+                           Assets.logoNameLogo,
                             width: isMobile ? size.width * 0.35 : size.width * 0.2,
                           )
                               .animate()
