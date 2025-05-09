@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zagasm/screen/auth/SplashScreen.dart';
+import 'package:zagasm/screen/profile/userProfile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Splashscreen(),
+      home:  Splashscreen(),
     );
   }
 }

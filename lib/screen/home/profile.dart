@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../profile/userProfile.dart';
+import '../settings.dart';
+import '../wallet/wallet.dart';
 
 class ProfileTabDrawer extends StatelessWidget {
   const ProfileTabDrawer({super.key});
@@ -42,15 +44,15 @@ class ProfileTabDrawer extends StatelessWidget {
             Row(
               children: [
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => UserProfileScreen(),
+                      builder: (context) => ModernProfileScreen(),
                     ));
                   },
                   child: CircleAvatar(
                     radius: 24,
                     backgroundImage: NetworkImage(
-                      'https://i.pravatar.cc/150?img=47', // sample profile
+                      'https://i.pravatar.cc/150?img=47',
                     ),
                   ),
                 ),
@@ -62,18 +64,64 @@ class ProfileTabDrawer extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            _buildOption(context, Icons.swap_horiz, "Switch Accounts"),
-            _buildOption(context, Icons.account_balance_wallet, "Wallet: \$0.00", highlight: true),
-            _buildOption(context, Icons.settings, "Settings"),
-            _buildOption(context, Icons.logout, "Sign Out"),
-            _buildOption(context, Icons.nightlight_round, "Night Mode"),
+            _buildOption(
+              context,
+              Icons.swap_horiz,
+              "Switch Accounts",
+              onTap: () {
+                // Add switch account logic here
+              },
+            ),
+            _buildOption(
+              context,
+              Icons.account_balance_wallet,
+              "Wallet: \$0.00",
+              highlight: true,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => AdvancedWalletScreen()),
+                );
+              },
+            ),
+            _buildOption(
+              context,
+              Icons.settings,
+              "Settings",
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => SettingsScreen()),
+                );
+              },
+            ),
+            _buildOption(
+              context,
+              Icons.logout,
+              "Sign Out",
+              onTap: () {
+                // Add sign-out logic here
+              },
+            ),
+            _buildOption(
+              context,
+              Icons.nightlight_round,
+              "Night Mode",
+              onTap: () {
+                // Add toggle dark mode logic
+              },
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildOption(BuildContext context, IconData icon, String title, {bool highlight = false}) {
+  Widget _buildOption(
+      BuildContext context,
+      IconData icon,
+      String title, {
+        bool highlight = false,
+        VoidCallback? onTap,
+      }) {
     return ListTile(
       leading: Icon(icon, color: highlight ? Colors.blue : Colors.black),
       title: Text(
@@ -83,7 +131,7 @@ class ProfileTabDrawer extends StatelessWidget {
           fontSize: 15,
         ),
       ),
-      onTap: () => Navigator.pop(context),
+      onTap: onTap,
     );
   }
 }

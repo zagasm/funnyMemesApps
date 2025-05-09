@@ -5,6 +5,7 @@ import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:zagasm/screen/auth/signUpScreen.dart';
 import '../../generated/assets.dart';
 import '../../widgets/showSnackBar.dart';
+import 'forget_Password_Screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -69,20 +70,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
           return Stack(
             children: [
-              // Gradient background
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      //Color.fromARGB(180, 103, 58, 183),
-                      Colors.white,Colors.white,
-                    ],
+                    colors: [Colors.white, Colors.white],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
                 ),
               ),
-
               Center(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -101,15 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Logo
                           Image.asset(
-                           Assets.logoNameLogo,
+                            Assets.logoNameLogo,
                             width: isMobile ? size.width * 0.35 : size.width * 0.2,
-                          )
-                              .animate()
-                              .fadeIn(duration: 1.seconds)
-                              .scale(duration: 800.ms)
-                              .shimmer(duration: 2.seconds),
+                          ).animate().fadeIn(duration: 1.seconds).scale(duration: 800.ms).shimmer(duration: 2.seconds),
 
                           const SizedBox(height: 20),
 
@@ -139,7 +130,28 @@ class _LoginScreenState extends State<LoginScreen> {
                             obscure: true,
                           ).animate().fadeIn(duration: 600.ms).slideX(begin: 0.5),
 
-                          const SizedBox(height: 30),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => const ForgotPasswordScreen()),
+                                );
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                                style: GoogleFonts.roboto(
+                                  color: Colors.deepPurple,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(height: 10),
 
                           GestureDetector(
                             onTap: _handleLogin,
@@ -174,12 +186,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           const SizedBox(height: 24),
 
-                          // Modern side-by-side social buttons
                           Row(
                             children: [
                               Expanded(
                                 child: _buildSocialButton(
-                                  icon: 'assets/logo/google.png',
+                                  icon: Assets.logoGoogle,
                                   text: 'Google',
                                   onPressed: () {
                                     showCustomSnackbar(
@@ -194,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               const SizedBox(width: 16),
                               Expanded(
                                 child: _buildSocialButton(
-                                  icon: 'assets/logo/apple.png',
+                                  icon: Assets.logoApple,
                                   text: 'Apple',
                                   dark: true,
                                   onPressed: () {
@@ -216,11 +227,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                                MaterialPageRoute(builder: (_) => const SignUpScreen()),
                               );
                             },
-                            child:
-                            RichText(
+                            child: RichText(
                               text: TextSpan(
                                 text: "Don’t have an account? ",
                                 style: GoogleFonts.roboto(
@@ -239,7 +249,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                             ),
-
                           ).animate().fadeIn(duration: 600.ms),
                         ],
                       ),

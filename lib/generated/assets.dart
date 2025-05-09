@@ -2,11 +2,14 @@
 class Assets {
   Assets._();
 
+  static const String imagesFlower = 'assets/images/flower.jpg';
   static const String imagesNoData = 'assets/images/noData.jpg';
   static const String imagesUser = 'assets/images/user.png';
   static const String imagesVice = 'assets/images/vice.jpg';
+  static const String imagesZAGASMLOGO = 'assets/images/ZAGASMLOGO.png';
   static const String logoApple = 'assets/logo/apple.png';
   static const String logoGoogle = 'assets/logo/google.png';
   static const String logoNameLogo = 'assets/logo/nameLogo.png';
+  static const String logoText = 'assets/logo/text.jpg';
 
 }

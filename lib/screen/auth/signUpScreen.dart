@@ -157,7 +157,75 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ).animate().fadeIn(duration: 500.ms).slideX(begin: 0.5),
 
                         const SizedBox(height: 25),
-
+                        //privacy Policy checkBox
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: isPrivacyChecked,
+                              activeColor: Colors.deepPurple,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  isPrivacyChecked = !isPrivacyChecked;
+                                });
+                                // If using setState:
+                                // setState(() {});
+                              },
+                            ),
+                            Expanded(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: '      I agree to the ',
+                                  style: GoogleFonts.orbitron(
+                                    fontSize: 12,
+                                    color: Colors.black87,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: 'Terms & Conditions',
+                                      style: GoogleFonts.orbitron(
+                                        color: Colors.deepPurple,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                              title: Text(
+                                                "Terms & Conditions",
+                                                style: GoogleFonts.orbitron(
+                                                  color: Colors.deepPurple,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              content: SingleChildScrollView(
+                                                child: Text(
+                                                  "By signing up, you agree to our Terms & Conditions and Privacy Policy. Please review them before proceeding.",
+                                                  style: GoogleFonts.roboto(fontSize: 14),
+                                                ),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  child: const Text("Close"),
+                                                  onPressed: () => Navigator.pop(context),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ).animate().fadeIn().slideY(begin: 0.1),
+                        SizedBox(height: 10,),
                         GestureDetector(
                           onTap: _handleSignUp,
                           child: Container(
@@ -218,84 +286,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ).animate().fadeIn(),
                         const SizedBox(height: 10),
 
-    Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
 
-    const SizedBox(height: 10),
-
-    // Privacy Checkbox
-    Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-    Checkbox(
-    value: isPrivacyChecked,
-    activeColor: Colors.deepPurple,
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(4),
-    ),
-    onChanged: (value) {
-    setState(() {
-      isPrivacyChecked = !isPrivacyChecked;
-    });
-    // If using setState:
-    // setState(() {});
-    },
-    ),
-    Expanded(
-    child: RichText(
-    text: TextSpan(
-    text: '      I agree to the ',
-    style: GoogleFonts.orbitron(
-    fontSize: 12,
-    color: Colors.black87,
-    ),
-    children: [
-    TextSpan(
-    text: 'Terms & Conditions',
-    style: GoogleFonts.orbitron(
-    color: Colors.deepPurple,
-    decoration: TextDecoration.underline,
-    ),
-    recognizer: TapGestureRecognizer()
-    ..onTap = () {
-    showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    title: Text(
-    "Terms & Conditions",
-    style: GoogleFonts.orbitron(
-    color: Colors.deepPurple,
-    fontWeight: FontWeight.bold,
-    ),
-    ),
-    content: SingleChildScrollView(
-    child: Text(
-    "By signing up, you agree to our Terms & Conditions and Privacy Policy. Please review them before proceeding.",
-    style: GoogleFonts.roboto(fontSize: 14),
-    ),
-    ),
-    actions: [
-    TextButton(
-    child: const Text("Close"),
-    onPressed: () => Navigator.pop(context),
-    ),
-    ],
-    ),
-    );
-    },
-    ),
-    ],
-    ),
-    ),
-    ),
-    ],
-    ).animate().fadeIn().slideY(begin: 0.1),
-
-    const SizedBox(height: 10),
-    ],
-    ),
 
 
     ],

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'MemeCreationScreen.dart';
 
 class AddTabDrawer extends StatelessWidget {
   const AddTabDrawer({super.key});
@@ -44,7 +47,7 @@ class AddTabDrawer extends StatelessWidget {
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.7,
-                  child: _buildAddButton(context, Icons.post_add, "Add Post", isMain: true),
+                  child: _buildAddButton(context, Icons.post_add, "Add Post", isMain: true, onTap: () => _addPost(context)),
                 ),
               ],
             ),
@@ -54,9 +57,9 @@ class AddTabDrawer extends StatelessWidget {
             // Second Row: Two Buttons
             Row(
               children: [
-                Expanded(child: _buildAddButton(context, Icons.photo, "Add Photo")),
+                Expanded(child: _buildAddButton(context, Icons.photo, "Add Photo", onTap: () => _addPhoto(context))),
                 const SizedBox(width: 12),
-                Expanded(child: _buildAddButton(context, Icons.video_call, "Add Video")),
+                Expanded(child: _buildAddButton(context, Icons.video_call, "Add Video",onTap: (){})),
               ],
             ),
 
@@ -65,9 +68,9 @@ class AddTabDrawer extends StatelessWidget {
             // Third Row: Two Buttons
             Row(
               children: [
-                Expanded(child: _buildAddButton(context, Icons.event, "Add Event")),
+                Expanded(child: _buildAddButton(context, Icons.event, "Add Event",onTap: (){})),
                 const SizedBox(width: 12),
-                Expanded(child: _buildAddButton(context, Icons.group_add, "Add Group")),
+                Expanded(child: _buildAddButton(context, Icons.group_add, "Add Group",onTap: (){})),
               ],
             ),
           ],
@@ -76,11 +79,10 @@ class AddTabDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildAddButton(BuildContext context, IconData icon, String label, {bool isMain = false}) {
+  // The button widget
+  Widget _buildAddButton(BuildContext context, IconData icon, String label, {bool isMain = false, required Function onTap}) {
     return GestureDetector(
-      onTap: () {
-        // Handle tap
-      },
+      onTap: () => onTap(),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
@@ -135,5 +137,31 @@ class AddTabDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Action for "Add Post" button
+  void _addPost(BuildContext context) {
+    // Navigate to meme creation screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MemeCreationScreen(),
+      ),
+    );
+  }
+
+  // Action for "Add Photo" button
+  void _addPhoto(BuildContext context) {
+    // Trigger image picker to select photo
+    _pickImage();
+  }
+
+  // Image picker for photo selection
+  Future<void> _pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      // Do something with the picked image (e.g., show in meme creation screen)
+    }
   }
 }
